@@ -5,6 +5,15 @@
     </head>
     <body>
         <div class="container">
+            
+            <!--Mosta a mensagem que foi setada no flash -->
+            <?php if($this->session->flashdata("sucess")) : ?>
+                <p class=" alert alert-success"> <?php echo $this->session->flashdata("sucess") ?> </p>
+            <?php endif ?>
+            <?php if($this->session->flashdata("danger")) : ?>
+                <p class="alert alert-danger"> <?php echo $this->session->flashdata("danger") ?> </p>
+            <?php endif ?>
+            
             <h1>Produtos</h1>
             <table class="table">
                 <?php foreach ($produtos as $produto) : ?>
@@ -15,7 +24,12 @@
                 <?php endforeach ?>
             </table>
             
-            <?php if(!$this->session->userdata("usuario_logado")) : ?>
+            <?php if($this->session->userdata("usuario_logado")) : ?>
+                <?php echo anchor('produtos/formulario','Novo produto',array("class"=>"btn btn-primary"))?>
+            
+                <?php echo anchor('login/logout','Logout',array("class"=>"btn btn-primary"))?>
+            
+                <?php else : ?>
             <h1>Login</h1>
             <?php 
                 echo form_open("login/autenticar");

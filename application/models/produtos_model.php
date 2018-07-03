@@ -5,5 +5,10 @@ class Produtos_model extends CI_model{
     public function buscarTodos(){
         return $this->db->get("produtos")->result_array();
     }
+    
+    //salvar os produtos no banco
+    public function salvar($produto){
+        $this->db->insert("produtos",$produto);
+    }
 }
 
